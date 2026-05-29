@@ -317,7 +317,7 @@ Com foco em qualidade, agilidade e transparência, trabalhamos lado a lado com n
 
 <div class="slider">
 
-<div class="slides" id="slides">
+
 
 <div class="slide"><img src="esquadria0.jpg" onclick="abrirModal(0)"></div>
 <div class="slide"><img src="esquadria1.jpg" onclick="abrirModal(1)"></div>
@@ -326,7 +326,7 @@ Com foco em qualidade, agilidade e transparência, trabalhamos lado a lado com n
 <div class="slide"><img src="esquadria4.jpg" onclick="abrirModal(4)"></div>
 <div class="slide"><img src="esquadria5.jpg" onclick="abrirModal(5)"></div>
 
-</div>
+
 
 </div>
 
@@ -374,23 +374,76 @@ Falar no WhatsApp
 
 <script>
 
-let index=0;
-const slides=document.getElementById('slides');
+let index = 0;
 
-function atualizar(){
-slides.style.transform=
-`translateX(-${index*100}%)`;
+const slides =
+document.querySelectorAll('.slide');
+
+function atualizarCarrossel(){
+
+slides.forEach(slide=>{
+
+slide.classList.remove(
+'left',
+'center',
+'right',
+'hidden'
+);
+
+});
+
+let esquerda =
+(index - 1 + slides.length)
+% slides.length;
+
+let direita =
+(index + 1)
+% slides.length;
+
+slides[index]
+.classList.add('center');
+
+slides[esquerda]
+.classList.add('left');
+
+slides[direita]
+.classList.add('right');
+
+slides.forEach((slide,i)=>{
+
+if(
+i !== index &&
+i !== esquerda &&
+i !== direita
+){
+slide.classList.add('hidden');
+}
+
+});
+
 }
 
 function proximo(){
-index=(index+1)%6;
-atualizar();
+
+index =
+(index + 1)
+% slides.length;
+
+atualizarCarrossel();
+
 }
 
 function anterior(){
-index=(index-1+6)%6;
-atualizar();
+
+index =
+(index - 1 + slides.length)
+% slides.length;
+
+atualizarCarrossel();
+
 }
+
+atualizarCarrossel();
 
 setInterval(proximo,5000);
 
