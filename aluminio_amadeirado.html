@@ -142,7 +142,12 @@ h1{
     top:auto;
     transform:none !important;
     width:100% !important;
-    height:auto !important;
+    height:70vh !important;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     opacity:1 !important;
     margin-bottom:15px;
 }
@@ -275,16 +280,25 @@ footer{
 
 @media(max-width:768px){
 
+    
+
 h1{
     font-size:2rem;
 }
+
+.nav{
+    display:none;
+}    
 
 .hero h2{
     font-size:1.6rem;
 }
 
 .slide img{
-    height:300px;
+    width:100%;
+    height:auto;
+    max-height:70vh;
+    object-fit:contain;
 }
 
 }
@@ -451,12 +465,11 @@ setInterval(proximo,5000);
 /* Modal */
 
 const imagens=[
-'esquadria0.jpg',
-'esquadria1.jpg',
-'esquadria2.jpg',
-'esquadria3.jpg',
-'esquadria4.jpg',
-'esquadria5.jpg'
+'aluminio_amadeirado0.jpg',
+'aluminio_amadeirado1.jpg',
+'aluminio_amadeirado2.jpg',
+'aluminio_amadeirado3.jpg',
+'aluminio_amadeirado4.jpg'
 ];
 
 let modalIndex=0;
@@ -492,6 +505,31 @@ document.getElementById('modalImg').src=
 imagens[modalIndex];
 
 }
+
+ let touchStartX = 0;
+let touchEndX = 0;
+
+const slider =
+document.querySelector('.slider');
+
+slider.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+slider.addEventListener('touchend', e => {
+
+    touchEndX =
+    e.changedTouches[0].screenX;
+
+    if(touchEndX < touchStartX - 50){
+        proximo();
+    }
+
+    if(touchEndX > touchStartX + 50){
+        anterior();
+    }
+
+});   
 
 </script>
 
