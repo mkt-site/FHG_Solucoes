@@ -477,7 +477,7 @@ atualizarCarrossel();
 
 atualizarCarrossel();
 
-setInterval(proximo,5000);
+let autoCarousel = setInterval(proximo,5000);
 
 /* Modal */
 
@@ -493,18 +493,25 @@ let modalIndex=0;
 
 function abrirModal(i){
 
-modalIndex=i;
+    modalIndex=i;
 
-document.getElementById('modal').style.display='block';
+    clearInterval(autoCarousel);
 
-document.getElementById('modalImg').src=
-imagens[modalIndex];
+    document.getElementById('modal').style.display='block';
+
+    document.getElementById('modalImg').src=
+    imagens[modalIndex];
+
 }
 
 function fecharModal(){
-document.getElementById('modal').style.display='none';
-}
 
+    document.getElementById('modal').style.display='none';
+
+    autoCarousel =
+    setInterval(proximo,5000);
+
+}
 function modalProximo(){
 
 modalIndex=(modalIndex+1)%imagens.length;
