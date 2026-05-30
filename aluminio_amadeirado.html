@@ -132,6 +132,14 @@ h1{
 
 @media(max-width:768px){
 
+.nav{
+    display:none;
+}
+
+.modal-nav{
+    display:none;
+}
+    
 .slider{
     height:auto;
 }
@@ -241,19 +249,21 @@ footer{
 .modal-content{
     width:90%;
     max-width:1400px;
-    margin:auto;
-    display:block;
-    margin-top:40px;
-    max-height:85vh;
+    max-height:90vh;
     object-fit:contain;
-}
 
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
 .close{
     position:absolute;
-    right:30px;
-    top:20px;
-    font-size:40px;
-    cursor:pointer;
+    right:15px;
+    top:00px;
+    font-size:28px;
+    color:white;
+    z-index:10000;
 }
 
 .modal-nav{
@@ -268,6 +278,14 @@ footer{
     border-radius:50%;
     cursor:pointer;
     font-size:24px;
+}
+
+@media(max-width:768px){
+
+    .modal-nav{
+        display:none !important;
+    }
+
 }
 
 .modal-prev{
@@ -529,6 +547,32 @@ slider.addEventListener('touchend', e => {
     }
 
 });   
+
+let modalTouchStart = 0;
+let modalTouchEnd = 0;
+
+const modalImg =
+document.getElementById('modalImg');
+
+modalImg.addEventListener('touchstart', e => {
+    modalTouchStart =
+    e.changedTouches[0].screenX;
+});
+
+modalImg.addEventListener('touchend', e => {
+
+    modalTouchEnd =
+    e.changedTouches[0].screenX;
+
+    if(modalTouchEnd < modalTouchStart - 50){
+        modalProximo();
+    }
+
+    if(modalTouchEnd > modalTouchStart + 50){
+        modalAnterior();
+    }
+
+});    
 
 </script>
 
